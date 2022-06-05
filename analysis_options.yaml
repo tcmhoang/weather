@@ -1,0 +1,42 @@
+include: package:very_good_analysis/analysis_options.3.0.0.yaml
+analyzer:
+  exclude:
+    - "bin/cache/**"
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*.gr.dart"
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+  errors:
+    missing_return: error
+    must_be_immutable: error
+    must_call_super: error
+    invalid_use_of_protected_member: error
+    parameter_assignments: error
+    sort_unnamed_constructors_first: ignore
+    prefer_relative_imports: error
+    prefer_single_quotes: error
+    constant_identifier_names: ignore
+    always_use_package_imports: ignore
+    public_member_api_docs: ignore
+    invalid_annotation_target: ignore
+
+dart_code_metrics:
+  anti-patterns:
+    - long-method
+    - long-parameter-list
+  metrics:
+    cyclomatic-complexity: 20
+    maximum-nesting-level: 5
+    number-of-parameters: 4
+    source-lines-of-code: 50
+  metrics-exclude:
+    - test/**
+  rules:
+    - newline-before-return
+    - no-boolean-literal-compare
+    - no-empty-block
+    - prefer-trailing-comma
+    - prefer-conditional-expressions
+    - no-equal-then-else
