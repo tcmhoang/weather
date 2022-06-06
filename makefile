@@ -18,9 +18,14 @@ run_unit: ## Runs unit tests
 	@echo "╠ Running the tests"
 	@flutter test || (echo "Error while running tests"; exit 1)
 
-coverage: ##run test and gen coverage report
-	@very_good test --coverage --min-coverage 100
-	@genhtml coverage/lcov.info -o coverage/
+coverage:  ##run test and gen coverage report
+	@very_good test --coverage --exclude-coverage '**/*.{g,freezed,gr}.dart' --min-coverage 100
+	@lcov --remove coverage/lcov.info -o coverage/exclude.info \
+    '**/*.g.dart' \
+	'**/*.freezed.dart' \
+    '**/*.gr.dart'
+	@genhtml coverage/exclude.info -o coverage
+
 
 clean: ## Cleans the environment
 	@echo "╠ Cleaning the project..."
