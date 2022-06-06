@@ -1,11 +1,15 @@
+import 'package:weather/core/utils/exceptions.dart';
+
 /// Exception thrown when locationSearch fails.
-class LocationIdRequestFailure implements Exception {}
+class LocationIdRequestException extends RestApiException {
+  LocationIdRequestException(super.statusCode);
+}
 
 /// Exception thrown when the provided location is not found.
-class LocationNotFoundFailure implements Exception {}
+class LocationNotFoundException implements Exception {}
 
 /// Exception thrown when getWeather fails.
-class WeatherRequestFailure implements Exception {}
+class WeatherRequestException implements Exception {}
 
 /// Exception thrown when weather for provided location is not found.
-class WeatherNotFoundFailure implements Exception {}
+class WeatherNotFoundException implements Exception {}

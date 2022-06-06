@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'lat_long.freezed.dart';
 
 @freezed
