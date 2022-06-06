@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:weather/meta_weather_api/infrastructure/location/lat_long_converter.dart';
 import '../enums/enums.dart';
 import 'lat_long.dart';
+import 'lat_long_converter.dart';
 
 part 'location.freezed.dart';
 part 'location.g.dart';

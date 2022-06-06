@@ -1,4 +1,4 @@
-import 'package:weather/core/utils/exceptions.dart';
+import '../../core/utils/exceptions.dart';
 
 /// Exception thrown when locationSearch fails.
 class LocationIdRequestException extends RestApiException {
