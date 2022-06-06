@@ -1,1 +1,0 @@
-class WeatherException implements Exception {}

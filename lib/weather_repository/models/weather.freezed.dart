@@ -14,17 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Weather _$WeatherFromJson(Map<String, dynamic> json) {
-  return _Weather.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Weather {
   String get location => throw _privateConstructorUsedError;
   double get temperature => throw _privateConstructorUsedError;
   WeatherCondition get condition => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $WeatherCopyWith<Weather> get copyWith => throw _privateConstructorUsedError;
 }
@@ -109,16 +104,13 @@ class __$$_WeatherCopyWithImpl<$Res> extends _$WeatherCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_Weather extends _Weather {
   const _$_Weather(
       {required this.location,
       required this.temperature,
       required this.condition})
       : super._();
-
-  factory _$_Weather.fromJson(Map<String, dynamic> json) =>
-      _$$_WeatherFromJson(json);
 
   @override
   final String location;
@@ -143,7 +135,6 @@ class _$_Weather extends _Weather {
             const DeepCollectionEquality().equals(other.condition, condition));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -155,11 +146,6 @@ class _$_Weather extends _Weather {
   @override
   _$$_WeatherCopyWith<_$_Weather> get copyWith =>
       __$$_WeatherCopyWithImpl<_$_Weather>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_WeatherToJson(this);
-  }
 }
 
 abstract class _Weather extends Weather {
@@ -168,8 +154,6 @@ abstract class _Weather extends Weather {
       required final double temperature,
       required final WeatherCondition condition}) = _$_Weather;
   const _Weather._() : super._();
-
-  factory _Weather.fromJson(Map<String, dynamic> json) = _$_Weather.fromJson;
 
   @override
   String get location => throw _privateConstructorUsedError;

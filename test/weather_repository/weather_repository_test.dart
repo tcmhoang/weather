@@ -1,8 +1,11 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import 'package:weather/weather_repository/weather_repository.dart';
+
 import 'package:weather/meta_weather_api/meta_weather_api.dart'
     as meta_weather_api;
-import 'package:weather/weather_repository/weather_repository.dart';
 
 class MockMetaWeatherApiClient extends Mock
     implements meta_weather_api.MetaWeatherApiClient {}
@@ -32,19 +35,39 @@ void main() {
         verify(() => metaWeatherApiClient.locationSearch(city)).called(1);
       });
 
-      test('throws when locationSearch fails', () async {
+      test('Return none when locationSearch fails', () async {
         final exception = Exception('oops');
         when(() => metaWeatherApiClient.locationSearch(any()))
-            .thenThrow(exception);
+            .thenAnswer((_) async => throw exception);
+        final noneValue = await weatherRepository.getWeather(city);
         expect(
-          () async => weatherRepository.getWeather(city),
-          throwsA(exception),
+          noneValue,
+          none<meta_weather_api.Weather>(),
+        );
+      });
+
+      test('Return none when getWeather fails', () async {
+        final exception = Exception('oops');
+        final location = MockLocation();
+
+        when(() => location.woeid).thenReturn(woeid);
+        when(() => location.title).thenReturn('London');
+        when(() => metaWeatherApiClient.locationSearch(any()))
+            .thenAnswer((_) async => location);
+        when(() => metaWeatherApiClient.getWeather(woeid))
+            .thenAnswer((_) async => throw exception);
+
+        final noneValue = await weatherRepository.getWeather(city);
+        expect(
+          noneValue,
+          none<meta_weather_api.Weather>(),
         );
       });
 
       test('calls getWeather with correct woeid', () async {
         final location = MockLocation();
         when(() => location.woeid).thenReturn(woeid);
+        when(() => location.title).thenReturn(city);
         when(() => metaWeatherApiClient.locationSearch(any())).thenAnswer(
           (_) async => location,
         );
@@ -52,20 +75,6 @@ void main() {
           await weatherRepository.getWeather(city);
         } catch (_) {}
         verify(() => metaWeatherApiClient.getWeather(woeid)).called(1);
-      });
-
-      test('throws when getWeather fails', () async {
-        final exception = Exception('oops');
-        final location = MockLocation();
-        when(() => location.woeid).thenReturn(woeid);
-        when(() => metaWeatherApiClient.locationSearch(any())).thenAnswer(
-          (_) async => location,
-        );
-        when(() => metaWeatherApiClient.getWeather(any())).thenThrow(exception);
-        expect(
-          () async => weatherRepository.getWeather(city),
-          throwsA(exception),
-        );
       });
 
       test('returns correct weather on success (showers)', () async {
@@ -84,12 +93,16 @@ void main() {
           (_) async => weather,
         );
         final actual = await weatherRepository.getWeather(city);
-        expect(
-          actual,
-          const Weather(
-            temperature: 42.42,
-            location: 'London',
-            condition: WeatherCondition.rainy,
+
+        actual.fold(
+          () => fail('Cannot be none'),
+          (weather) => expect(
+            weather,
+            const Weather(
+              temperature: 42.42,
+              location: 'London',
+              condition: WeatherCondition.rainy,
+            ),
           ),
         );
       });
@@ -110,12 +123,16 @@ void main() {
           (_) async => weather,
         );
         final actual = await weatherRepository.getWeather(city);
-        expect(
-          actual,
-          const Weather(
-            temperature: 42.42,
-            location: 'London',
-            condition: WeatherCondition.cloudy,
+
+        actual.fold(
+          () => fail('Cannot be none'),
+          (weather) => expect(
+            weather,
+            const Weather(
+              temperature: 42.42,
+              location: 'London',
+              condition: WeatherCondition.cloudy,
+            ),
           ),
         );
       });
@@ -136,12 +153,15 @@ void main() {
           (_) async => weather,
         );
         final actual = await weatherRepository.getWeather(city);
-        expect(
-          actual,
-          const Weather(
-            temperature: 42.42,
-            location: 'London',
-            condition: WeatherCondition.cloudy,
+        actual.fold(
+          () => fail('Cannot be none'),
+          (weather) => expect(
+            weather,
+            const Weather(
+              temperature: 42.42,
+              location: 'London',
+              condition: WeatherCondition.cloudy,
+            ),
           ),
         );
       });
