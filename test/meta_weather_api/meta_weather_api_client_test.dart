@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import 'package:weather/core/utils/exceptions.dart';
 import 'package:weather/meta_weather_api/infrastructure/enums/enums.dart';
 import 'package:weather/meta_weather_api/infrastructure/location/lat_long.dart';
 import 'package:weather/meta_weather_api/meta_weather_api.dart';
@@ -9,11 +13,16 @@ class FakeUri extends Fake implements Uri {}
 
 class MockDio extends Mock implements Dio {}
 
+class DioAdapterMock extends Mock implements HttpClientAdapter {}
+
 class MockResponse<T> extends Mock implements Response<T> {}
 
 void main() {
   group('MetaWeatherApiClient', () {
     late Dio mockDioClient;
+
+    late DioAdapterMock dioAdapterMock;
+
     late MetaWeatherApiClient metaWeatherApiClient;
 
     setUpAll(() {
@@ -22,24 +31,26 @@ void main() {
 
     setUp(() {
       mockDioClient = MockDio();
+      dioAdapterMock = DioAdapterMock();
+      mockDioClient.httpClientAdapter = dioAdapterMock;
       metaWeatherApiClient = MetaWeatherApiClient(mockDioClient);
     });
 
     group('locationSearch', () {
       const query = 'mock-query';
       test('makes correct http request', () async {
-        final response = MockResponse<List<dynamic>>();
+        final response = MockResponse<dynamic>();
         when(() => response.statusCode).thenReturn(200);
-        when(() => response.data).thenReturn(<dynamic>[]);
+        when<dynamic>(() => response.data).thenReturn(<dynamic>[]);
 
-        when(() => mockDioClient.getUri<List<dynamic>>(any())).thenAnswer(
+        when(() => mockDioClient.getUri<dynamic>(any())).thenAnswer(
           (_) async => response,
         );
         try {
           await metaWeatherApiClient.locationSearch(query);
         } catch (_) {}
         verify(
-          () => mockDioClient.getUri<List<Location>>(
+          () => mockDioClient.getUri<dynamic>(
             Uri.https(
               'metaweather.com',
               '/api/location/search',
@@ -50,26 +61,41 @@ void main() {
       });
 
       test('throws LocationIdRequestFailure on non-200 response', () async {
-        final response = MockResponse<List<Location>>();
+        final response = MockResponse<dynamic>();
         when(() => response.statusCode).thenReturn(400);
-        when(() => mockDioClient.getUri<List<Location>>(any()))
+        when(() => mockDioClient.getUri<dynamic>(any()))
             .thenAnswer((_) async => response);
         expect(
           () async => metaWeatherApiClient.locationSearch(query),
-          throwsA(isA<LocationIdRequestFailure>()),
+          throwsA(isA<LocationIdRequestException>()),
         );
       });
 
       test('throws LocationNotFoundFailure on empty response', () async {
-        final response = MockResponse<List<dynamic>>();
+        final response = MockResponse<dynamic>();
         when(() => response.statusCode).thenReturn(200);
-        when(() => response.data).thenReturn(<dynamic>[]);
+        when<dynamic>(() => response.data).thenReturn(<dynamic>[]);
         when(() => mockDioClient.getUri<dynamic>(any()))
             .thenAnswer((_) async => response);
         await expectLater(
           metaWeatherApiClient.locationSearch(query),
-          throwsA(isA<LocationNotFoundFailure>()),
+          throwsA(isA<LocationNotFoundException>()),
         );
+      });
+
+      test('throws NetworkException when internet not available', () async {
+        when(() => mockDioClient.getUri<dynamic>(any())).thenThrow(
+          DioError(
+            requestOptions: RequestOptions(path: query),
+            error: SocketException,
+          ),
+        );
+
+        try {
+          await metaWeatherApiClient.locationSearch(query);
+        } catch (e) {
+          expect(e, isInstanceOf<NoInternetException>());
+        }
       });
 
       test('returns Location on valid response', () async {
@@ -131,7 +157,7 @@ void main() {
             .thenAnswer((_) async => response);
         expect(
           () async => metaWeatherApiClient.getWeather(locationId),
-          throwsA(isA<WeatherRequestFailure>()),
+          throwsA(isA<WeatherRequestException>()),
         );
       });
 
@@ -143,7 +169,7 @@ void main() {
             .thenAnswer((_) async => response);
         expect(
           () async => metaWeatherApiClient.getWeather(locationId),
-          throwsA(isA<WeatherNotFoundFailure>()),
+          throwsA(isA<WeatherNotFoundException>()),
         );
       });
 
@@ -158,8 +184,22 @@ void main() {
             .thenAnswer((_) async => response);
         expect(
           () async => metaWeatherApiClient.getWeather(locationId),
-          throwsA(isA<WeatherNotFoundFailure>()),
+          throwsA(isA<WeatherNotFoundException>()),
         );
+      });
+      test('throws NetworkException when internet not available', () async {
+        when(() => mockDioClient.getUri<dynamic>(any())).thenThrow(
+          DioError(
+            requestOptions: RequestOptions(path: ''),
+            error: SocketException,
+          ),
+        );
+
+        try {
+          await metaWeatherApiClient.getWeather(1);
+        } catch (e) {
+          expect(e, isInstanceOf<NoInternetException>());
+        }
       });
 
       test('returns weather on valid response', () async {
@@ -195,18 +235,30 @@ void main() {
               .having((w) => w.id, 'id', 4907479830888448)
               .having((w) => w.weatherStateName, 'state', 'Showers')
               .having((w) => w.weatherStateAbbr, 'abbr', WeatherState.showers)
-              .having((w) => w.windDirectionCompass, 'wind',
-                  WindDirectionCompass.southWest)
-              .having((w) => w.created, 'created',
-                  DateTime.parse('2020-10-26T00:20:01.840132Z'))
-              .having((w) => w.applicableDate, 'applicableDate',
-                  DateTime.parse('2020-10-26'))
+              .having(
+                (w) => w.windDirectionCompass,
+                'wind',
+                WindDirectionCompass.southWest,
+              )
+              .having(
+                (w) => w.created,
+                'created',
+                DateTime.parse('2020-10-26T00:20:01.840132Z'),
+              )
+              .having(
+                (w) => w.applicableDate,
+                'applicableDate',
+                DateTime.parse('2020-10-26'),
+              )
               .having((w) => w.minTemp, 'minTemp', 7.9399999999999995)
               .having((w) => w.maxTemp, 'maxTemp', 13.239999999999998)
               .having((w) => w.theTemp, 'theTemp', 12.825)
               .having((w) => w.windSpeed, 'windSpeed', 7.876886316914553)
               .having(
-                  (w) => w.windDirection, 'windDirection', 246.17046093256732)
+                (w) => w.windDirection,
+                'windDirection',
+                246.17046093256732,
+              )
               .having((w) => w.airPressure, 'airPressure', 997.0)
               .having((w) => w.humidity, 'humidity', 73)
               .having((w) => w.visibility, 'visibility', 11.037727173307882)

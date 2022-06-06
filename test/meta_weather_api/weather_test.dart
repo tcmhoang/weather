@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
-import 'package:weather/meta_weather_api/infrastructure/enums/enums.dart';
 
+import 'package:weather/meta_weather_api/infrastructure/enums/enums.dart';
 import 'package:weather/meta_weather_api/meta_weather_api.dart';
 
 void main() {
