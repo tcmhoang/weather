@@ -8,6 +8,7 @@ class LatLongConverter implements JsonConverter<LatLong, String> {
   @override
   LatLong fromJson(String json) {
     final parts = json.split(',');
+
     return LatLong(
       latitude: double.tryParse(parts[0]) ?? 0,
       longitude: double.tryParse(parts[1]) ?? 0,

@@ -5,8 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:weather/core/utils/exceptions.dart';
-import 'package:weather/meta_weather_api/infrastructure/enums/enums.dart';
-import 'package:weather/meta_weather_api/infrastructure/location/lat_long.dart';
 import 'package:weather/meta_weather_api/meta_weather_api.dart';
 
 class FakeUri extends Fake implements Uri {}
