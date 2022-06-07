@@ -25,7 +25,7 @@ analyze:
 	@flutter pub run dart_code_metrics:metrics check-unused-code lib
 
 coverage:  ##run test and gen coverage report
-	@very_good test --coverage --exclude-coverage '**/*.{g,freezed,gr}.dart' --min-coverage 100
+	@very_good test --coverage --exclude-coverage '**/*.{g,freezed,gr}.dart' --min-coverage 100 || true
 	@lcov --remove coverage/lcov.info -o coverage/exclude.info \
     '**/*.g.dart' \
 	'**/*.freezed.dart' \
