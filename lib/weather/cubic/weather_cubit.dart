@@ -7,7 +7,6 @@ import '../weather.dart';
 import 'package:weather/weather_repository/weather_repository.dart'
     show WeatherRepository;
 
-
 class WeatherCubit extends HydratedCubit<WeatherState> {
   WeatherCubit(this._weatherRepository)
       : super(WeatherState.initial(weather: Weather.empty));

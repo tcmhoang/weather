@@ -7,6 +7,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'package:weather/app/theme/bloc/color_converter.dart';
 import '../../../weather/weather.dart';
+
 import '../../../weather_repository/weather_repository.dart'
     hide Weather, $WeatherCopyWith;
 
@@ -25,7 +26,7 @@ class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
 
   FutureOr<void> _onEvent(ThemeEvent event, Emitter emit) => event.when(
         weatherUpdate: (w) => emit(ThemeState.updating(color: w.toColor)),
-        submit: (w) => ThemeState.applied(color: w.toColor),
+        submit: (w) => emit(ThemeState.applied(color: w.toColor)),
       );
 
   @override
