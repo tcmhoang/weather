@@ -7,7 +7,8 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'package:weather/app/theme/bloc/color_converter.dart';
 import '../../../weather/weather.dart';
-import '../../../weather_repository/weather_repository.dart' hide Weather;
+import '../../../weather_repository/weather_repository.dart'
+    hide Weather, $WeatherCopyWith;
 
 part 'theme_bloc.freezed.dart';
 part 'theme_bloc.g.dart';
