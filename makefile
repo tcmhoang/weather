@@ -47,7 +47,7 @@ watch: ## Watches the files for changes
 gen: ## Generates the assets
 	@echo "╠ Generating the assets..."
 	@flutter pub get
-	@flutter packages pub run build_runner build
+	@flutter packages pub run build_runner build --delete-conflicting-outputs
 
 format: ## Formats the code
 	@echo "╠ Formatting the code"
