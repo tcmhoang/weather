@@ -7,6 +7,7 @@ environment:
   sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
+  auto_route: ^4.0.1
   bloc: ^8.0.3
   dartz: ^0.10.1
   dio: ^4.0.6
@@ -16,8 +17,10 @@ dependencies:
   freezed_annotation: ^2.0.3
   hydrated_bloc: ^8.1.0
   json_annotation: ^4.5.0
+  path_provider: ^2.0.11
 
 dev_dependencies:
+  auto_route_generator: ^4.0.0
   bloc_test: ^9.0.3
   build_runner: ^2.1.11
   dart_code_metrics: ^4.15.2

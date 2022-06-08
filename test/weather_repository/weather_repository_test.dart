@@ -1,9 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import 'package:weather/weather_repository/weather_repository.dart';
+
 import 'package:weather/meta_weather_api/meta_weather_api.dart'
     as meta_weather_api;
-import 'package:weather/weather_repository/weather_repository.dart';
 
 class MockMetaWeatherApiClient extends Mock
     implements meta_weather_api.MetaWeatherApiClient {}

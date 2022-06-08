@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'package:weather/weather_repository/weather_repository.dart';
+
 import 'package:weather/meta_weather_api/meta_weather_api.dart'
     as infrastructure;
-import 'package:weather/weather_repository/weather_repository.dart';
 
 void main() {
   group('Weather', () {

@@ -2,12 +2,13 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
 import 'package:weather/weather/weather.dart';
 import 'package:weather/weather_repository/models/enums/enums.dart';
+import 'helper/hydrated_bloc.dart';
+
 import 'package:weather/weather_repository/weather_repository.dart'
     as weather_repository;
-
-import 'helper/hydrated_bloc.dart';
 
 const weatherLocation = 'London';
 const weatherCondition = weather_repository.WeatherCondition.rainy;

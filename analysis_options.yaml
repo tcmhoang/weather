@@ -22,6 +22,7 @@ analyzer:
     public_member_api_docs: ignore
     invalid_annotation_target: ignore
     one_member_abstracts: ignore
+    directives_ordering: ignore
 
 dart_code_metrics:
   anti-patterns:

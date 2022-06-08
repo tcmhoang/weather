@@ -1,10 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'temperature.dart';
+
 import 'package:weather/weather_repository/weather_repository.dart'
     hide Weather;
 import 'package:weather/weather_repository/weather_repository.dart'
     as repository;
-
-import 'temperature.dart';
 
 part 'weather.freezed.dart';
 part 'weather.g.dart';

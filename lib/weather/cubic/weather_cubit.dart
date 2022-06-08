@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-import '../../weather_repository/weather_repository.dart'
-    show WeatherRepository;
 import '../utils/temperature_units_extensions.dart';
 import '../weather.dart';
+
+import 'package:weather/weather_repository/weather_repository.dart'
+    show WeatherRepository;
+
 
 class WeatherCubit extends HydratedCubit<WeatherState> {
   WeatherCubit(this._weatherRepository)
