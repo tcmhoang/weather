@@ -37,7 +37,7 @@ mixin _$WeatherState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(TemperatureUnits unit, Weather weather) initial,
-    required TResult Function(TemperatureUnits unit) loading,
+    required TResult Function(TemperatureUnits unit, Weather weather) loading,
     required TResult Function(TemperatureUnits unit, Weather weather) success,
     required TResult Function(TemperatureUnits unit) failure,
   }) =>
@@ -45,7 +45,7 @@ mixin _$WeatherState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(TemperatureUnits unit, Weather weather)? initial,
-    TResult Function(TemperatureUnits unit)? loading,
+    TResult Function(TemperatureUnits unit, Weather weather)? loading,
     TResult Function(TemperatureUnits unit, Weather weather)? success,
     TResult Function(TemperatureUnits unit)? failure,
   }) =>
@@ -53,7 +53,7 @@ mixin _$WeatherState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(TemperatureUnits unit, Weather weather)? initial,
-    TResult Function(TemperatureUnits unit)? loading,
+    TResult Function(TemperatureUnits unit, Weather weather)? loading,
     TResult Function(TemperatureUnits unit, Weather weather)? success,
     TResult Function(TemperatureUnits unit)? failure,
     required TResult orElse(),
@@ -216,7 +216,7 @@ class _$_initial implements _initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(TemperatureUnits unit, Weather weather) initial,
-    required TResult Function(TemperatureUnits unit) loading,
+    required TResult Function(TemperatureUnits unit, Weather weather) loading,
     required TResult Function(TemperatureUnits unit, Weather weather) success,
     required TResult Function(TemperatureUnits unit) failure,
   }) {
@@ -227,7 +227,7 @@ class _$_initial implements _initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(TemperatureUnits unit, Weather weather)? initial,
-    TResult Function(TemperatureUnits unit)? loading,
+    TResult Function(TemperatureUnits unit, Weather weather)? loading,
     TResult Function(TemperatureUnits unit, Weather weather)? success,
     TResult Function(TemperatureUnits unit)? failure,
   }) {
@@ -238,7 +238,7 @@ class _$_initial implements _initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(TemperatureUnits unit, Weather weather)? initial,
-    TResult Function(TemperatureUnits unit)? loading,
+    TResult Function(TemperatureUnits unit, Weather weather)? loading,
     TResult Function(TemperatureUnits unit, Weather weather)? success,
     TResult Function(TemperatureUnits unit)? failure,
     required TResult orElse(),
@@ -315,7 +315,9 @@ abstract class _$$_loadingCopyWith<$Res>
           _$_loading value, $Res Function(_$_loading) then) =
       __$$_loadingCopyWithImpl<$Res>;
   @override
-  $Res call({TemperatureUnits unit});
+  $Res call({TemperatureUnits unit, Weather weather});
+
+  $WeatherCopyWith<$Res> get weather;
 }
 
 /// @nodoc
@@ -330,20 +332,35 @@ class __$$_loadingCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? unit = freezed,
+    Object? weather = freezed,
   }) {
     return _then(_$_loading(
       unit: unit == freezed
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as TemperatureUnits,
+      weather: weather == freezed
+          ? _value.weather
+          : weather // ignore: cast_nullable_to_non_nullable
+              as Weather,
     ));
+  }
+
+  @override
+  $WeatherCopyWith<$Res> get weather {
+    return $WeatherCopyWith<$Res>(_value.weather, (value) {
+      return _then(_value.copyWith(weather: value));
+    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$_loading implements _loading {
-  const _$_loading({this.unit = TemperatureUnits.celsius, final String? $type})
+  const _$_loading(
+      {this.unit = TemperatureUnits.celsius,
+      required this.weather,
+      final String? $type})
       : $type = $type ?? 'loading';
 
   factory _$_loading.fromJson(Map<String, dynamic> json) =>
@@ -352,13 +369,15 @@ class _$_loading implements _loading {
   @override
   @JsonKey()
   final TemperatureUnits unit;
+  @override
+  final Weather weather;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'WeatherState.loading(unit: $unit)';
+    return 'WeatherState.loading(unit: $unit, weather: $weather)';
   }
 
   @override
@@ -366,13 +385,16 @@ class _$_loading implements _loading {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_loading &&
-            const DeepCollectionEquality().equals(other.unit, unit));
+            const DeepCollectionEquality().equals(other.unit, unit) &&
+            const DeepCollectionEquality().equals(other.weather, weather));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(unit));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(unit),
+      const DeepCollectionEquality().hash(weather));
 
   @JsonKey(ignore: true)
   @override
@@ -383,35 +405,35 @@ class _$_loading implements _loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(TemperatureUnits unit, Weather weather) initial,
-    required TResult Function(TemperatureUnits unit) loading,
+    required TResult Function(TemperatureUnits unit, Weather weather) loading,
     required TResult Function(TemperatureUnits unit, Weather weather) success,
     required TResult Function(TemperatureUnits unit) failure,
   }) {
-    return loading(unit);
+    return loading(unit, weather);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(TemperatureUnits unit, Weather weather)? initial,
-    TResult Function(TemperatureUnits unit)? loading,
+    TResult Function(TemperatureUnits unit, Weather weather)? loading,
     TResult Function(TemperatureUnits unit, Weather weather)? success,
     TResult Function(TemperatureUnits unit)? failure,
   }) {
-    return loading?.call(unit);
+    return loading?.call(unit, weather);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(TemperatureUnits unit, Weather weather)? initial,
-    TResult Function(TemperatureUnits unit)? loading,
+    TResult Function(TemperatureUnits unit, Weather weather)? loading,
     TResult Function(TemperatureUnits unit, Weather weather)? success,
     TResult Function(TemperatureUnits unit)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(unit);
+      return loading(unit, weather);
     }
     return orElse();
   }
@@ -460,12 +482,15 @@ class _$_loading implements _loading {
 }
 
 abstract class _loading implements WeatherState {
-  const factory _loading({final TemperatureUnits unit}) = _$_loading;
+  const factory _loading(
+      {final TemperatureUnits unit,
+      required final Weather weather}) = _$_loading;
 
   factory _loading.fromJson(Map<String, dynamic> json) = _$_loading.fromJson;
 
   @override
   TemperatureUnits get unit => throw _privateConstructorUsedError;
+  Weather get weather => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_loadingCopyWith<_$_loading> get copyWith =>
@@ -569,7 +594,7 @@ class _$_success implements _success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(TemperatureUnits unit, Weather weather) initial,
-    required TResult Function(TemperatureUnits unit) loading,
+    required TResult Function(TemperatureUnits unit, Weather weather) loading,
     required TResult Function(TemperatureUnits unit, Weather weather) success,
     required TResult Function(TemperatureUnits unit) failure,
   }) {
@@ -580,7 +605,7 @@ class _$_success implements _success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(TemperatureUnits unit, Weather weather)? initial,
-    TResult Function(TemperatureUnits unit)? loading,
+    TResult Function(TemperatureUnits unit, Weather weather)? loading,
     TResult Function(TemperatureUnits unit, Weather weather)? success,
     TResult Function(TemperatureUnits unit)? failure,
   }) {
@@ -591,7 +616,7 @@ class _$_success implements _success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(TemperatureUnits unit, Weather weather)? initial,
-    TResult Function(TemperatureUnits unit)? loading,
+    TResult Function(TemperatureUnits unit, Weather weather)? loading,
     TResult Function(TemperatureUnits unit, Weather weather)? success,
     TResult Function(TemperatureUnits unit)? failure,
     required TResult orElse(),
@@ -736,7 +761,7 @@ class _$_failure implements _failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(TemperatureUnits unit, Weather weather) initial,
-    required TResult Function(TemperatureUnits unit) loading,
+    required TResult Function(TemperatureUnits unit, Weather weather) loading,
     required TResult Function(TemperatureUnits unit, Weather weather) success,
     required TResult Function(TemperatureUnits unit) failure,
   }) {
@@ -747,7 +772,7 @@ class _$_failure implements _failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(TemperatureUnits unit, Weather weather)? initial,
-    TResult Function(TemperatureUnits unit)? loading,
+    TResult Function(TemperatureUnits unit, Weather weather)? loading,
     TResult Function(TemperatureUnits unit, Weather weather)? success,
     TResult Function(TemperatureUnits unit)? failure,
   }) {
@@ -758,7 +783,7 @@ class _$_failure implements _failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(TemperatureUnits unit, Weather weather)? initial,
-    TResult Function(TemperatureUnits unit)? loading,
+    TResult Function(TemperatureUnits unit, Weather weather)? loading,
     TResult Function(TemperatureUnits unit, Weather weather)? success,
     TResult Function(TemperatureUnits unit)? failure,
     required TResult orElse(),

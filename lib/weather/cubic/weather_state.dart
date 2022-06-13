@@ -14,6 +14,7 @@ class WeatherState with _$WeatherState {
   }) = _initial;
   const factory WeatherState.loading({
     @Default(TemperatureUnits.celsius) TemperatureUnits unit,
+    required Weather weather,
   }) = _loading;
   const factory WeatherState.success({
     @Default(TemperatureUnits.celsius) TemperatureUnits unit,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/weather_presentation/view/view.dart';
 
 import 'providers/providers.dart';
 import 'theme/theme.dart';
@@ -28,7 +29,7 @@ class RunnerPage extends StatelessWidget implements AutoRouteWrapper {
                   textTheme.apply(bodyColor: Colors.white).headline6,
             ),
           ),
-          home: Container(),
+          home: const WeatherPage(),
         );
       },
     );

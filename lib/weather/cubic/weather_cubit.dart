@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-import '../utils/temperature_units_extensions.dart';
 import '../weather.dart';
 
 import 'package:weather/weather_repository/weather_repository.dart'
@@ -16,7 +15,16 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
   Future<Unit> fetchWeather(String city) async {
     if (city.isEmpty) return unit;
 
-    emit(WeatherState.loading(unit: state.unit));
+    emit(
+      WeatherState.loading(
+        weather: state.maybeWhen(
+          success: (_, weather) => weather,
+          initial: (_, weather) => weather,
+          orElse: () => Weather.empty,
+        ),
+        unit: state.unit,
+      ),
+    );
 
     final weather = await _weatherRepository
         .getWeather(city)

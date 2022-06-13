@@ -47,6 +47,8 @@ _$_loading _$$_loadingFromJson(Map<String, dynamic> json) => $checkedCreate(
               (v) =>
                   $enumDecodeNullable(_$TemperatureUnitsEnumMap, v) ??
                   TemperatureUnits.celsius),
+          weather: $checkedConvert(
+              'weather', (v) => Weather.fromJson(v as Map<String, dynamic>)),
           $type: $checkedConvert('runtimeType', (v) => v as String?),
         );
         return val;
@@ -57,6 +59,7 @@ _$_loading _$$_loadingFromJson(Map<String, dynamic> json) => $checkedCreate(
 Map<String, dynamic> _$$_loadingToJson(_$_loading instance) =>
     <String, dynamic>{
       'unit': _$TemperatureUnitsEnumMap[instance.unit],
+      'weather': instance.weather.toJson(),
       'runtimeType': instance.$type,
     };
 
