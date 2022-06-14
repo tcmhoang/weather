@@ -9,3 +9,4 @@ jobs:
       flutter_channel: stable
       flutter_version: 3.0.1
       coverage_excludes: "**/*.{g,freezed,gr}.dart"
+      min_coverage: 90

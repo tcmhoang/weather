@@ -1,5 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+
+import 'package:auto_route/auto_route.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -42,7 +43,7 @@ class _SearchPageState extends State<SearchPage> {
             key: const Key('searchPage_search_iconButton'),
             icon: const Icon(Icons.search),
             onPressed: () => context.popRoute<String>(_text),
-          )
+          ),
         ],
       ),
     );

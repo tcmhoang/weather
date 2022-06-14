@@ -92,7 +92,7 @@ void main() {
         build: () => weatherCubit,
         act: (cubit) => cubit.fetchWeather(weatherLocation),
         expect: () => <WeatherState>[
-          const WeatherState.loading(),
+          WeatherState.loading(weather: Weather.empty),
           const WeatherState.failure(),
         ],
       );
@@ -102,7 +102,7 @@ void main() {
         build: () => weatherCubit,
         act: (cubit) => cubit.fetchWeather(weatherLocation),
         expect: () => <dynamic>[
-          const WeatherState.loading(),
+          WeatherState.loading(weather: Weather.empty),
           isA<WeatherState>().having(
             (w) => w.mapOrNull(success: (value) => value.weather),
             'weather',
@@ -128,7 +128,10 @@ void main() {
         ),
         act: (cubit) => cubit.fetchWeather(weatherLocation),
         expect: () => <dynamic>[
-          const WeatherState.loading(unit: TemperatureUnits.fahrenheit),
+          WeatherState.loading(
+            unit: TemperatureUnits.fahrenheit,
+            weather: Weather.empty,
+          ),
           isA<WeatherState>().having(
             (w) => w.mapOrNull(success: (value) => value.weather),
             'weather',

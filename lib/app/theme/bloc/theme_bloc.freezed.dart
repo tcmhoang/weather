@@ -20,38 +20,32 @@ mixin _$ThemeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Weather weather) weatherUpdate,
-    required TResult Function(Weather weather) submit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Weather weather)? weatherUpdate,
-    TResult Function(Weather weather)? submit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Weather weather)? weatherUpdate,
-    TResult Function(Weather weather)? submit,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_weatherUpdate value) weatherUpdate,
-    required TResult Function(_Submit value) submit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_weatherUpdate value)? weatherUpdate,
-    TResult Function(_Submit value)? submit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_weatherUpdate value)? weatherUpdate,
-    TResult Function(_Submit value)? submit,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -170,7 +164,6 @@ class _$_weatherUpdate implements _weatherUpdate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Weather weather) weatherUpdate,
-    required TResult Function(Weather weather) submit,
   }) {
     return weatherUpdate(weather);
   }
@@ -179,7 +172,6 @@ class _$_weatherUpdate implements _weatherUpdate {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Weather weather)? weatherUpdate,
-    TResult Function(Weather weather)? submit,
   }) {
     return weatherUpdate?.call(weather);
   }
@@ -188,7 +180,6 @@ class _$_weatherUpdate implements _weatherUpdate {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Weather weather)? weatherUpdate,
-    TResult Function(Weather weather)? submit,
     required TResult orElse(),
   }) {
     if (weatherUpdate != null) {
@@ -201,7 +192,6 @@ class _$_weatherUpdate implements _weatherUpdate {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_weatherUpdate value) weatherUpdate,
-    required TResult Function(_Submit value) submit,
   }) {
     return weatherUpdate(this);
   }
@@ -210,7 +200,6 @@ class _$_weatherUpdate implements _weatherUpdate {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_weatherUpdate value)? weatherUpdate,
-    TResult Function(_Submit value)? submit,
   }) {
     return weatherUpdate?.call(this);
   }
@@ -219,7 +208,6 @@ class _$_weatherUpdate implements _weatherUpdate {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_weatherUpdate value)? weatherUpdate,
-    TResult Function(_Submit value)? submit,
     required TResult orElse(),
   }) {
     if (weatherUpdate != null) {
@@ -241,154 +229,8 @@ abstract class _weatherUpdate implements ThemeEvent {
       throw _privateConstructorUsedError;
 }
 
-/// @nodoc
-abstract class _$$_SubmitCopyWith<$Res> implements $ThemeEventCopyWith<$Res> {
-  factory _$$_SubmitCopyWith(_$_Submit value, $Res Function(_$_Submit) then) =
-      __$$_SubmitCopyWithImpl<$Res>;
-  @override
-  $Res call({Weather weather});
-
-  @override
-  $WeatherCopyWith<$Res> get weather;
-}
-
-/// @nodoc
-class __$$_SubmitCopyWithImpl<$Res> extends _$ThemeEventCopyWithImpl<$Res>
-    implements _$$_SubmitCopyWith<$Res> {
-  __$$_SubmitCopyWithImpl(_$_Submit _value, $Res Function(_$_Submit) _then)
-      : super(_value, (v) => _then(v as _$_Submit));
-
-  @override
-  _$_Submit get _value => super._value as _$_Submit;
-
-  @override
-  $Res call({
-    Object? weather = freezed,
-  }) {
-    return _then(_$_Submit(
-      weather: weather == freezed
-          ? _value.weather
-          : weather // ignore: cast_nullable_to_non_nullable
-              as Weather,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_Submit implements _Submit {
-  const _$_Submit({required this.weather});
-
-  @override
-  final Weather weather;
-
-  @override
-  String toString() {
-    return 'ThemeEvent.submit(weather: $weather)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Submit &&
-            const DeepCollectionEquality().equals(other.weather, weather));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(weather));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$_SubmitCopyWith<_$_Submit> get copyWith =>
-      __$$_SubmitCopyWithImpl<_$_Submit>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Weather weather) weatherUpdate,
-    required TResult Function(Weather weather) submit,
-  }) {
-    return submit(weather);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Weather weather)? weatherUpdate,
-    TResult Function(Weather weather)? submit,
-  }) {
-    return submit?.call(weather);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Weather weather)? weatherUpdate,
-    TResult Function(Weather weather)? submit,
-    required TResult orElse(),
-  }) {
-    if (submit != null) {
-      return submit(weather);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_weatherUpdate value) weatherUpdate,
-    required TResult Function(_Submit value) submit,
-  }) {
-    return submit(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_weatherUpdate value)? weatherUpdate,
-    TResult Function(_Submit value)? submit,
-  }) {
-    return submit?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_weatherUpdate value)? weatherUpdate,
-    TResult Function(_Submit value)? submit,
-    required TResult orElse(),
-  }) {
-    if (submit != null) {
-      return submit(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Submit implements ThemeEvent {
-  const factory _Submit({required final Weather weather}) = _$_Submit;
-
-  @override
-  Weather get weather => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  _$$_SubmitCopyWith<_$_Submit> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
 ThemeState _$ThemeStateFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'applied':
-      return _applied.fromJson(json);
-    case 'updating':
-      return _updating.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'ThemeState',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
+  return _applied.fromJson(json);
 }
 
 /// @nodoc
@@ -398,38 +240,32 @@ mixin _$ThemeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(@ColorConverter() Color color) applied,
-    required TResult Function(@ColorConverter() Color color) updating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(@ColorConverter() Color color)? applied,
-    TResult Function(@ColorConverter() Color color)? updating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(@ColorConverter() Color color)? applied,
-    TResult Function(@ColorConverter() Color color)? updating,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_applied value) applied,
-    required TResult Function(_updating value) updating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_applied value)? applied,
-    TResult Function(_updating value)? updating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_applied value)? applied,
-    TResult Function(_updating value)? updating,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -502,8 +338,7 @@ class __$$_appliedCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_applied implements _applied {
-  const _$_applied({@ColorConverter() required this.color, final String? $type})
-      : $type = $type ?? 'applied';
+  const _$_applied({@ColorConverter() required this.color});
 
   factory _$_applied.fromJson(Map<String, dynamic> json) =>
       _$$_appliedFromJson(json);
@@ -511,9 +346,6 @@ class _$_applied implements _applied {
   @override
   @ColorConverter()
   final Color color;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
   @override
   String toString() {
@@ -542,7 +374,6 @@ class _$_applied implements _applied {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(@ColorConverter() Color color) applied,
-    required TResult Function(@ColorConverter() Color color) updating,
   }) {
     return applied(color);
   }
@@ -551,7 +382,6 @@ class _$_applied implements _applied {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(@ColorConverter() Color color)? applied,
-    TResult Function(@ColorConverter() Color color)? updating,
   }) {
     return applied?.call(color);
   }
@@ -560,7 +390,6 @@ class _$_applied implements _applied {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(@ColorConverter() Color color)? applied,
-    TResult Function(@ColorConverter() Color color)? updating,
     required TResult orElse(),
   }) {
     if (applied != null) {
@@ -573,7 +402,6 @@ class _$_applied implements _applied {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_applied value) applied,
-    required TResult Function(_updating value) updating,
   }) {
     return applied(this);
   }
@@ -582,7 +410,6 @@ class _$_applied implements _applied {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_applied value)? applied,
-    TResult Function(_updating value)? updating,
   }) {
     return applied?.call(this);
   }
@@ -591,7 +418,6 @@ class _$_applied implements _applied {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_applied value)? applied,
-    TResult Function(_updating value)? updating,
     required TResult orElse(),
   }) {
     if (applied != null) {
@@ -618,160 +444,5 @@ abstract class _applied implements ThemeState {
   @override
   @JsonKey(ignore: true)
   _$$_appliedCopyWith<_$_applied> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_updatingCopyWith<$Res> implements $ThemeStateCopyWith<$Res> {
-  factory _$$_updatingCopyWith(
-          _$_updating value, $Res Function(_$_updating) then) =
-      __$$_updatingCopyWithImpl<$Res>;
-  @override
-  $Res call({@ColorConverter() Color color});
-}
-
-/// @nodoc
-class __$$_updatingCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
-    implements _$$_updatingCopyWith<$Res> {
-  __$$_updatingCopyWithImpl(
-      _$_updating _value, $Res Function(_$_updating) _then)
-      : super(_value, (v) => _then(v as _$_updating));
-
-  @override
-  _$_updating get _value => super._value as _$_updating;
-
-  @override
-  $Res call({
-    Object? color = freezed,
-  }) {
-    return _then(_$_updating(
-      color: color == freezed
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_updating implements _updating {
-  const _$_updating(
-      {@ColorConverter() required this.color, final String? $type})
-      : $type = $type ?? 'updating';
-
-  factory _$_updating.fromJson(Map<String, dynamic> json) =>
-      _$$_updatingFromJson(json);
-
-  @override
-  @ColorConverter()
-  final Color color;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'ThemeState.updating(color: $color)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_updating &&
-            const DeepCollectionEquality().equals(other.color, color));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(color));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$_updatingCopyWith<_$_updating> get copyWith =>
-      __$$_updatingCopyWithImpl<_$_updating>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(@ColorConverter() Color color) applied,
-    required TResult Function(@ColorConverter() Color color) updating,
-  }) {
-    return updating(color);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(@ColorConverter() Color color)? applied,
-    TResult Function(@ColorConverter() Color color)? updating,
-  }) {
-    return updating?.call(color);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(@ColorConverter() Color color)? applied,
-    TResult Function(@ColorConverter() Color color)? updating,
-    required TResult orElse(),
-  }) {
-    if (updating != null) {
-      return updating(color);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_applied value) applied,
-    required TResult Function(_updating value) updating,
-  }) {
-    return updating(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_applied value)? applied,
-    TResult Function(_updating value)? updating,
-  }) {
-    return updating?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_applied value)? applied,
-    TResult Function(_updating value)? updating,
-    required TResult orElse(),
-  }) {
-    if (updating != null) {
-      return updating(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_updatingToJson(this);
-  }
-}
-
-abstract class _updating implements ThemeState {
-  const factory _updating({@ColorConverter() required final Color color}) =
-      _$_updating;
-
-  factory _updating.fromJson(Map<String, dynamic> json) = _$_updating.fromJson;
-
-  @override
-  @ColorConverter()
-  Color get color => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  _$$_updatingCopyWith<_$_updating> get copyWith =>
       throw _privateConstructorUsedError;
 }

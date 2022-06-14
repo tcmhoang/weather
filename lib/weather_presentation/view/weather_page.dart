@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:weather/app/theme/theme.dart';
 import 'package:weather/weather/weather.dart';
-
 import '../../app/router/router.dart';
 import '../widgets/widgets.dart';
 
@@ -20,7 +21,7 @@ class WeatherPage extends StatelessWidget {
           IconButton(
             onPressed: () => context.pushRoute(const SettingsRoute()),
             icon: const Icon(Icons.settings),
-          )
+          ),
         ],
       ),
       body: Center(
@@ -36,9 +37,7 @@ class WeatherPage extends StatelessWidget {
             failure: (_) => const WeatherError(),
           ),
           listener: (context, state) => state.maybeWhen(
-            success: (_, w) =>
-                context.read<ThemeBloc>().add(ThemeEvent.submit(weather: w)),
-            loading: (_, w) => context.read<ThemeBloc>().add(
+            success: (_, w) => context.read<ThemeBloc>().add(
                   ThemeEvent.weatherUpdate(weather: w),
                 ),
             orElse: () => unit,

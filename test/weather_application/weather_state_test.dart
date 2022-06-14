@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:weather/weather/utils/temperature_units_extensions.dart';
 import 'package:weather/weather/weather.dart';
 
 void main() {

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:weather/weather_presentation/widgets/weather_populated/weather_background.dart';
 
+import 'package:weather/weather_presentation/widgets/weather_populated/weather_background.dart';
 import '../../../weather/weather.dart';
 import 'weather_icon.dart';
 
@@ -20,6 +20,7 @@ class WeatherPopulated extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Stack(
       children: [
         const WeatherBackground(),

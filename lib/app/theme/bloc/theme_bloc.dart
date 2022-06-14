@@ -25,8 +25,7 @@ class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
   static const kDefaultColor = Color(0xFF2196F3);
 
   FutureOr<void> _onEvent(ThemeEvent event, Emitter emit) => event.when(
-        weatherUpdate: (w) => emit(ThemeState.updating(color: w.toColor)),
-        submit: (w) => emit(ThemeState.applied(color: w.toColor)),
+        weatherUpdate: (w) => emit(ThemeState.applied(color: w.toColor)),
       );
 
   @override

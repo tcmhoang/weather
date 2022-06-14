@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:weather/weather_presentation/view/view.dart';
 
+import 'package:weather/weather_presentation/view/view.dart';
 import '../../search/search.dart';
 import '../../settings/settings.dart';
 import '../runner_page.dart';

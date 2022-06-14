@@ -56,7 +56,8 @@ void main() {
       blocTest<ThemeBloc, ThemeState>(
         'emits correct state for WeatherCondition.clear',
         build: () => themeBloc,
-        act: (bloc) => bloc.add(ThemeEvent.submit(weather: clearWeather)),
+        act: (bloc) =>
+            bloc.add(ThemeEvent.weatherUpdate(weather: clearWeather)),
         expect: () => [
           isA<ThemeState>().having(
             (c) => c.color,
@@ -69,7 +70,8 @@ void main() {
       blocTest<ThemeBloc, ThemeState>(
         'emits correct color for WeatherCondition.snowy',
         build: () => themeBloc,
-        act: (bloc) => bloc.add(ThemeEvent.submit(weather: snowyWeather)),
+        act: (bloc) =>
+            bloc.add(ThemeEvent.weatherUpdate(weather: snowyWeather)),
         expect: () => [
           isA<ThemeState>().having(
             (c) => c.color,
